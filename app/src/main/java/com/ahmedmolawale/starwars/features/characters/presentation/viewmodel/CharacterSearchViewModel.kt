@@ -31,7 +31,6 @@ class CharacterSearchViewModel @Inject constructor(
         get() = _charactersSearchView
 
     fun searchCharacters(searchString: String) {
-        //job.cancel()
         _charactersSearchView.value = CharacterSearchView(loading = true)
         if (searchString.isNotBlank()) {
             getCharacters(job, searchString) {

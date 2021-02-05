@@ -3,9 +3,10 @@
 
 An Android application to showcase Star Wars characters. The application allows user to search
 for Star Wars characters and view the details of each character. The application consumes
-data from the [Star Wars API](https://starwar.dev/)
+data from the [Star Wars API](https://swapi.dev/)
 
 Minimum Api Level : 22
+compileSdkVersion : 30
 
 Build System : [Gradle](https://gradle.org/)
 
@@ -36,9 +37,9 @@ The Application is split into a three layer architecture:
 #### Data
 
 The data layer handles the business logic and provides data from the
-star way API and a local database leveraging Room. This layer uses the
+star wars API and a local database leveraging Room. This layer uses the
 Repository pattern to fetch data from various data sources which in
-this case is the Star War API and a local database.
+this case is the Star Wars API and a local database.
 
 
 #### Domain
@@ -65,20 +66,20 @@ Libraries used in the application are:
 
 - [Jetpack](https://developer.android.com/jetpack)
   - [Viewmodel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manage UI related data in a lifecycle conscious way
-  and act as a channel between use cases and UI
-  - [Data Binding](https://developer.android.com/topic/libraries/data-binding) - support library that allows binding of UI components in layouts to data sources,binds character details and search results to UI
+  and act as a channel between use cases and UI.
+  - [Data Binding](https://developer.android.com/topic/libraries/data-binding) - support library that allows binding of UI components in layouts to data sources, binds character details and search results to UI.
   - [Room](https://developer.android.com/training/data-storage/room) - Provides abstraction layer over SQLite.
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Provides an observable data holder class.
 - [Retrofit](https://square.github.io/retrofit/) - type safe http client and supports coroutines out of the box.
 - [Shimmer](https://facebook.github.io/shimmer-android/) - Shimmer provides an easy way to add a shimmer effect to views in the application.
-- [Moshi](https://github.com/square/moshi) - JSON Parser,used to parse requests on the data layer for Entities and understands Kotlin non-nullable
+- [Moshi](https://github.com/square/moshi) - JSON Parser, used to parse requests on the data layer for Entities and understands Kotlin non-nullable
 and default parameters.
 - [okhttp-logging-interceptor](https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor/README.md) - logs HTTP request and response data.
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines. I used this for asynchronous programming in order
 to obtain data from the network as well as the database.
 - [JUnit](https://junit.org/junit4/) - This was used for unit testing the repository, the use cases and the ViewModels.
 - [Mockk](https://mockk.io/) This is a mocking library for Kotlin. I used it to provide test doubles during testing.
-- [Truth](https://truth.dev/) - Assertions Library,provides readability as far as assertions are concerned.
+- [Truth](https://truth.dev/) - Assertions Library, provides readability as far as assertions are concerned.
 - [Hilt](https://github.com/InsertKoinIO/koin) - Dependency injection plays a central role in the architectural pattern used.
 For this reason I have chosen Hilt which is built on top of the battle tested DI framework - Dagger 2.
 - [Robolectric](http://robolectric.org/) - Unit test on android framework.
@@ -101,7 +102,7 @@ The ```GetRecentCharacters``` also reaches out to the repository which gets the 
 the local database.
 Furthermore, clicking on any character in the list triggers the ```CharacterDetailsFragment```.
 The basic character information like name, birth year, and height are passed to the ```CharacterDetailFragment```
-using a Percable ```CharacterPresentation``` object. This screen reaches out to the ```CharacterDetailsViewModel```
+using a Percable ```SCharacterPresentation``` object. This screen reaches out to the ```CharacterDetailsViewModel```
 to retrieve the planet details of the character. There is a ```ViewPager``` on the CharacterDetails screen which
 uses two other fragments to show species and films the character has appeared in. The two fragments
 are ```CharacterFilmsFragment``` and ```CharacterSpecieFragment```. The fragments essentials take in the
@@ -120,6 +121,7 @@ In general, any particular flow can be said to follow the steps below:
 ## Testing
 
 The different layer has various test cases.
+
 The data layer has tests for the repository and DAO. To test the repository, test doubles were provided for the API service and DAO.
 To test the DAO, a memory-based Room database was used and this was largely made possible by AndroidX test library and Roboelectric.
 
