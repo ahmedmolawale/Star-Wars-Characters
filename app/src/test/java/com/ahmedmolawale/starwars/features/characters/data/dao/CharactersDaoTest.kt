@@ -154,19 +154,6 @@ class CharactersDaoTest {
         assertThat(savedCharacters).isEmpty()
     }
 
-//    @Test
-//    fun `insert a list of characters with films and species should save to db`() = runBlockingTest {
-////        charactersDao.insertCharacters(
-////            characterWithFilmsWithSpecies
-////        )
-//        charactersDao.deleteAllCharacters()
-//        val savedCharacters = charactersDao.getAllCharacters()
-//        assertThat(savedCharacters[0].character).isEqualTo(characterEntity)
-//        assertThat(savedCharacters[0].films).isEqualTo(filmEntities)
-//        assertThat(savedCharacters[0].species).isEqualTo(specieEntities)
-//    }
-
-
     @After
     @Throws(IOException::class)
     fun tearDown() {

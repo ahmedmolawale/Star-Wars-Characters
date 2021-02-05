@@ -10,6 +10,7 @@ import com.ahmedmolawale.starwars.features.characters.domain.usecases.GetCharact
 import com.ahmedmolawale.starwars.features.characters.presentation.mapper.toPresentation
 import com.ahmedmolawale.starwars.getOrAwaitValueTest
 import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import org.junit.Before
@@ -48,10 +49,10 @@ class CharacterFilmViewModelTest : UnitTest() {
         characterFilmViewModel.getFilms(filmsUrls)
 
         val res = characterFilmViewModel.filmView.getOrAwaitValueTest()
-        Truth.assertThat(res.errorMessage).isNull()
-        Truth.assertThat(res.loading).isFalse()
-        Truth.assertThat(res.isEmpty).isFalse()
-        Truth.assertThat(res.films).isEqualTo(films.map { it.toPresentation() })
+        assertThat(res.errorMessage).isNull()
+        assertThat(res.loading).isFalse()
+        assertThat(res.isEmpty).isFalse()
+        assertThat(res.films).isEqualTo(films.map { it.toPresentation() })
     }
 
     @Test
@@ -62,10 +63,10 @@ class CharacterFilmViewModelTest : UnitTest() {
         characterFilmViewModel.getFilms(filmsUrls)
 
         val res = characterFilmViewModel.filmView.getOrAwaitValueTest()
-        Truth.assertThat(res.errorMessage).isNull()
-        Truth.assertThat(res.loading).isFalse()
-        Truth.assertThat(res.isEmpty).isTrue()
-        Truth.assertThat(res.films).isNull()
+        assertThat(res.errorMessage).isNull()
+        assertThat(res.loading).isFalse()
+        assertThat(res.isEmpty).isTrue()
+        assertThat(res.films).isNull()
     }
 
     @Test
@@ -76,9 +77,9 @@ class CharacterFilmViewModelTest : UnitTest() {
         characterFilmViewModel.getFilms(filmsUrls)
 
         val res = characterFilmViewModel.filmView.getOrAwaitValueTest()
-        Truth.assertThat(res.errorMessage).isNotNull()
-        Truth.assertThat(res.loading).isFalse()
-        Truth.assertThat(res.isEmpty).isFalse()
-        Truth.assertThat(res.films).isNull()
+        assertThat(res.errorMessage).isNotNull()
+        assertThat(res.loading).isFalse()
+        assertThat(res.isEmpty).isFalse()
+        assertThat(res.films).isNull()
     }
 }
