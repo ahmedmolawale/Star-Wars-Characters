@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="characterSpeciesViewModel"
+            type="com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterSpeciesViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="8dp">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:visibility="@{characterSpeciesViewModel.specieView.loading ? View.VISIBLE : View.GONE, default=visible}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shimmer_auto_start="true"
+            app:shimmer_highlight_color="@color/stroke_color">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <include layout="@layout/character_specie_item_shimmer" />
+
+                <include layout="@layout/character_specie_item_shimmer" />
+
+                <include layout="@layout/character_specie_item_shimmer" />
+
+                <include layout="@layout/character_specie_item_shimmer" />
+
+                <include layout="@layout/character_specie_item_shimmer" />
+
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/specie_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:visibility="@{characterSpeciesViewModel.specieView.species != null ? View.VISIBLE : View.GONE, default=gone}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:specieItems="@{characterSpeciesViewModel.specieView.species}"
+            tools:listitem="@layout/character_specie_item" />
+
+        <TextView
+            android:id="@+id/no_species"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/circularstdbook"
+            android:gravity="center"
+            android:text="@string/no_species"
+            android:textAllCaps="false"
+            android:textColor="@color/light_grey"
+            android:textSize="14sp"
+            android:visibility="@{characterSpeciesViewModel.specieView.empty ? View.VISIBLE : View.GONE, default=gone}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/error_species"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/circularstdbook"
+            android:gravity="center"
+            android:text="@{characterSpeciesViewModel.specieView.errorMessage}"
+            android:textAllCaps="false"
+            android:textColor="@color/light_grey"
+            android:textSize="14sp"
+            android:visibility="@{characterSpeciesViewModel.specieView.errorMessage != null ? View.VISIBLE : View.GONE, default=gone}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

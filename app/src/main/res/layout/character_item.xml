@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="character"
+            type="com.ahmedmolawale.starwars.features.characters.presentation.model.SCharacterPresentation" />
+
+        <variable
+            name="characterSearchViewModel"
+            type="com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterSearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:onClick="@{() -> characterSearchViewModel.openCharacterDetails(character)}"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <RelativeLayout
+            android:id="@+id/character_initials_layout"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/circular_shimmer_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/character_initials"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/circularstdbold"
+                android:text="@{character.nameInitials}"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                tools:text="AO" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/circularstdmedium"
+            android:text="@{character.name}"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/birth_year"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/character_initials_layout"
+            app:layout_constraintTop_toTopOf="@id/character_initials_layout"
+            tools:text="Olawale A." />
+
+        <TextView
+            android:id="@+id/birth_year"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/circularstdbook"
+            android:text="@{character.birthYearDesc}"
+            android:textAllCaps="false"
+            android:textColor="@color/light_grey"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/character_initials_layout"
+            app:layout_constraintStart_toEndOf="@id/character_initials_layout"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            tools:text="Born in 1996" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

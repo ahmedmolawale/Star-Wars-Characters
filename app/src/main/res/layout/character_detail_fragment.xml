@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="characterDetailViewModel"
+            type="com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterDetailViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/stroke_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/circularstdbook"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@{characterDetailViewModel.character.name}"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="ahmedmolawale" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/header"
+            android:background="@color/background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background">
+
+                        <RelativeLayout
+                            android:id="@+id/character_initials_layout"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="26dp"
+                            android:background="@drawable/circular_shimmer_bg"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/contactInitials"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:fontFamily="@font/circularstdbold"
+                                android:text="@{characterDetailViewModel.character.nameInitials}"
+                                android:textAlignment="center"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                tools:text="AO" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="26dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="26dp"
+                            android:fontFamily="@font/circularstdbold"
+                            android:gravity="center"
+                            android:text="@{characterDetailViewModel.character.name}"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/character_initials_layout"
+                            tools:text="Ahmed Olawale" />
+
+                        <LinearLayout
+                            android:id="@+id/height_section"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="26dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="26dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:visibility="visible"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/name">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/circularstdbook"
+                                android:gravity="center"
+                                android:text="@string/height"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/height_in_cm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:fontFamily="@font/circularstdbook"
+                                android:gravity="center"
+                                android:text="@{@string/height_in_cm(characterDetailViewModel.character.heightInCm)}"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                tools:text="168cm" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="14dp"
+                                android:layout_marginStart="5dp"
+                                android:background="@color/stroke_color"
+                                app:layout_constraintBottom_toBottomOf="@id/height_in_cm"
+                                app:layout_constraintStart_toEndOf="@id/height_in_cm"
+                                app:layout_constraintTop_toTopOf="@id/height_in_cm" />
+
+                            <TextView
+                                android:id="@+id/height_in_inches"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:fontFamily="@font/circularstdbook"
+                                android:gravity="center"
+                                android:text="@{@string/height_in_inches(characterDetailViewModel.character.heightInInches)}"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                tools:text="200 inches" />
+
+                        </LinearLayout>
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmer_view_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="60dp"
+                            android:visibility="@{characterDetailViewModel.planetView.loading ? View.VISIBLE : View.GONE, default=visible}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/height_section"
+                            app:shimmer_auto_start="true"
+                            app:shimmer_highlight_color="@color/stroke_color">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:background="@drawable/shimmer_bg" />
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+                        <TextView
+                            android:id="@+id/bio"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="60dp"
+                            android:fontFamily="@font/circularstdbook"
+                            android:gravity="center"
+                            android:lineSpacingMultiplier="1.2"
+                            android:text="@{@string/bio_desc(characterDetailViewModel.character.birthYear, characterDetailViewModel.planetView.planet.name, characterDetailViewModel.planetView.planet.population)}"
+                            android:textColor="@color/light_grey"
+                            android:textSize="14sp"
+                            android:visibility="@{characterDetailViewModel.planetView.planet != null ? View.VISIBLE : View.INVISIBLE, default=invisible}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/height_section"
+                            tools:text="Believer | Optimist | Grateful soul | Kindness | Game changer" />
+
+                        <TextView
+                            android:id="@+id/no_bio"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="60dp"
+                            android:fontFamily="@font/circularstdbook"
+                            android:gravity="center"
+                            android:lineSpacingMultiplier="1.2"
+                            android:onClick="@{() -> characterDetailViewModel.retryPlanetAgain()}"
+                            android:text="@{characterDetailViewModel.planetView.errorMessage}"
+                            android:textColor="@color/light_grey"
+                            android:textSize="14sp"
+                            android:visibility="@{characterDetailViewModel.planetView.errorMessage != null ? View.VISIBLE : View.INVISIBLE, default=gone}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/height_section"
+                            tools:text="Believer | Optimist | Grateful soul | Kindness | Game changer" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/stroke_color"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/bio" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_anchor="@id/app_bar"
+                app:layout_anchorGravity="bottom"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:tabIndicatorColor="@color/white"
+                    app:tabRippleColor="@color/transparent"
+                    app:tabSelectedTextColor="@color/white"
+                    app:tabTextAppearance="@style/tab_text" />
+
+            </androidx.viewpager.widget.ViewPager>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </RelativeLayout>
+</layout>

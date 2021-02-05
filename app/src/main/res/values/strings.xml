@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Star Wars</string>
+    <string name="search_hint">Search</string>
+    <string name="cancel">Cancel</string>
+    <string name="recent">Recent</string>
+    <string name="height">Height:</string>
+    <string name="bio_desc">Born in %s and belongs to planet %s with a population of %s</string>
+    <string name="height_in_inches">%s inches</string>
+    <string name="height_in_cm">%s cm</string>
+    <string name="no_species">No species available</string>
+    <string name="no_films">No films available</string>
+    <string name="no_characters">No characters available</string>
+</resources>
