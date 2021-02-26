@@ -8,12 +8,12 @@ import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.ahmedmolawale.starwars.R
 import com.ahmedmolawale.starwars.databinding.CharacterSearchFragmentBinding
-import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterSearchViewModel
 import com.ahmedmolawale.starwars.features.characters.presentation.adapter.CharactersAdapter
 import com.ahmedmolawale.starwars.features.characters.presentation.initRecyclerViewWithLineDecoration
+import com.ahmedmolawale.starwars.features.characters.presentation.model.SCharacterPresentation
+import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterSearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -29,7 +29,7 @@ class CharacterSearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = CharacterSearchFragmentBinding.inflate(inflater, container, false)
         binding.characterSearchViewModel = characterSearchViewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -39,8 +39,8 @@ class CharacterSearchFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         characterSearchViewModel.getRecentCharacters()
-        setupListAdapter()
         setupView()
+        setupListAdapter()
     }
 
     private fun setupView() {
@@ -49,31 +49,38 @@ class CharacterSearchFragment : Fragment() {
                 characterSearchViewModel.searchCharacters(it.toString())
             }
         }
-        characterSearchViewModel.openCharacterDetailsEvent.observe(viewLifecycleOwner, Observer {
-            val fm = activity?.supportFragmentManager
-            val characterDetailsFragment =
-                CharacterDetailsFragment()
-            characterDetailsFragment.arguments = bundleOf(
-                CHARACTER_DETAILS to it
-            )
-            fm?.beginTransaction()
-                ?.add(R.id.main_host, characterDetailsFragment, CharacterDetailsFragment.TAG)
-                ?.addToBackStack(CharacterDetailsFragment.TAG)?.commit()
-        })
+//        characterSearchViewModel.openCharacterDetailsEvent.observe(viewLifecycleOwner, Observer {
+//            val fm = activity?.supportFragmentManager
+//            val characterDetailsFragment =
+//                CharacterDetailsFragment()
+//            characterDetailsFragment.arguments = bundleOf(
+//                CHARACTER_DETAILS to it
+//            )
+//            fm?.beginTransaction()
+//                ?.add(R.id.main_host, characterDetailsFragment, CharacterDetailsFragment.TAG)
+//                ?.addToBackStack(CharacterDetailsFragment.TAG)?.commit()
+//        })
+    }
+
+    private fun openCharacterDetails(character: SCharacterPresentation) {
+        val fm = activity?.supportFragmentManager
+        val characterDetailsFragment =
+            CharacterDetailsFragment()
+        characterDetailsFragment.arguments = bundleOf(
+            CHARACTER_DETAILS to character
+        )
+        fm?.beginTransaction()
+            ?.add(R.id.main_host, characterDetailsFragment, CharacterDetailsFragment.TAG)
+            ?.addToBackStack(CharacterDetailsFragment.TAG)?.commit()
     }
 
     private fun setupListAdapter() {
-        val viewModel = binding.characterSearchViewModel
-        if (viewModel != null) {
-            characterAdapter =
-                CharactersAdapter(
-                    viewModel
-                )
-            context?.let {
-                binding.charactersRecyclerView.initRecyclerViewWithLineDecoration(it)
-            }
-            binding.charactersRecyclerView.adapter = characterAdapter
+        characterAdapter =
+            CharactersAdapter { character -> openCharacterDetails(character) }
+        context?.let {
+            binding.charactersRecyclerView.initRecyclerViewWithLineDecoration(it)
         }
+        binding.charactersRecyclerView.adapter = characterAdapter
     }
 
     override fun onDestroyView() {

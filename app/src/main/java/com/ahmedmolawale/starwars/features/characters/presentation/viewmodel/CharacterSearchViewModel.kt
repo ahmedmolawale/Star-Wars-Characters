@@ -70,13 +70,6 @@ class CharacterSearchViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Called by Data Binding.
-     */
-    fun openCharacterDetails(character: SCharacterPresentation) {
-        _openCharacterDetailsEvent.value = character
-    }
-
     override fun onCleared() {
         job.cancel()
         super.onCleared()

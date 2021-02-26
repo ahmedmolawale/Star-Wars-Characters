@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ahmedmolawale.starwars.databinding.CharacterFilmsFragmentBinding
-import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterFilmViewModel
 import com.ahmedmolawale.starwars.features.characters.presentation.adapter.CharacterFilmsAdapter
 import com.ahmedmolawale.starwars.features.characters.presentation.initRecyclerViewWithLineDecoration
 import com.ahmedmolawale.starwars.features.characters.presentation.model.SCharacterPresentation
+import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterFilmViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +25,7 @@ class CharacterFilmsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = CharacterFilmsFragmentBinding.inflate(inflater, container, false)
         binding.characterFilmViewModel = characterFilmViewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -47,9 +47,7 @@ class CharacterFilmsFragment : Fragment() {
         val viewModel = binding.characterFilmViewModel
         if (viewModel != null) {
             characterFilmsAdapter =
-                CharacterFilmsAdapter(
-                    viewModel
-                )
+                CharacterFilmsAdapter()
             context?.let {
                 binding.filmList.initRecyclerViewWithLineDecoration(it)
             }

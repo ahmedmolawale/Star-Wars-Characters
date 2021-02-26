@@ -11,16 +11,12 @@
             name="character"
             type="com.ahmedmolawale.starwars.features.characters.presentation.model.SCharacterPresentation" />
 
-        <variable
-            name="characterSearchViewModel"
-            type="com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterSearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background"
-        android:onClick="@{() -> characterSearchViewModel.openCharacterDetails(character)}"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
 

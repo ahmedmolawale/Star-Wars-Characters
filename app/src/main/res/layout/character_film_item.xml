@@ -10,19 +10,15 @@
         <variable
             name="film"
             type="com.ahmedmolawale.starwars.features.characters.presentation.model.FilmPresentation" />
-
-        <variable
-            name="characterFilmViewModel"
-            type="com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterFilmViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/background"
         android:paddingTop="10dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         android:paddingBottom="10dp">
 
         <TextView

@@ -3,27 +3,80 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'jacoco'
     id 'dagger.hilt.android.plugin'
 }
 
+jacoco {
+    toolVersion = "0.8.4"
+}
+
+
+//To include Robolectric tests (leverage simulated android framework) in the Jacoco report,
+//search all tasks of Test type and enable it.
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+    def coverageSourceDirs = [
+            "src/main/java",
+            "src/main/kotlin"
+    ]
+    def fileFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/*$ViewInjector*.*',
+            '**/*$ViewBinder*.*',
+            '**/BuildConfig.*',
+            '**/Manifest*.*'
+    ]
+    def javaClasses = fileTree(
+            dir: "$buildDir/intermediates/app_classes/debug",
+            excludes: fileFilter
+    )
+    def kotlinClasses = fileTree(
+            dir: "$buildDir/tmp/kotlin-classes/debug",
+            excludes: fileFilter
+    )
+    classDirectories.from = files([ javaClasses ], [kotlinClasses])
+    additionalSourceDirs.from = files(coverageSourceDirs)
+    sourceDirectories.from = files(coverageSourceDirs)
+    executionData.from = fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec",
+            "outputs/code_coverage/debugAndroidTest/connected/*.ec"
+    ])
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
 android {
-    compileSdkVersion 30
-    buildToolsVersion "29.0.3"
+    compileSdkVersion AndroidSdk.compileSdk
+    buildToolsVersion AndroidSdk.buildTools
 
     defaultConfig {
-        applicationId "com.ahmedmolawale.starwars"
-        minSdkVersion 22
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        applicationId AndroidClient.appId
+        minSdkVersion AndroidSdk.minSdk
+        targetSdkVersion AndroidSdk.targetSdk
+        versionCode AndroidClient.versionCode
+        versionName AndroidClient.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.ahmedmolawale.starwars.CustomTestRunner"
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+            testCoverageEnabled true //get coverage report for instrumentation tests
         }
     }
     compileOptions {
@@ -37,68 +90,102 @@ android {
         viewBinding true
         dataBinding true
     }
+
+    testOptions {
+        execution 'ANDROID_TEST_ORCHESTRATOR'
+        animationsDisabled true
+        unitTests { //do this to include android resources for roboelectric test
+            includeAndroidResources = true
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/*'
+    }
 }
 
 dependencies {
 
     def coroutinesVersion = "1.4.2"
-    def moshiConverterVersion = "2.9.0"
     def room_version = "2.2.6"
     def mockk_version = "1.10.5"
     def robolectricVersion = "4.5"
     def runnerVersion = "1.3.0"
-    def shimmerVersion = "0.5.0"
-    def retrofitVersion = "2.9.0"
-    def okhttpVersion = "4.9.0"
-    def constraintLayoutVersion = "2.0.4"
-    def androidCoreVersion = "1.3.2"
-    def fragmentKtxVersion = "1.2.5"
-    def appcompatVersion = "1.2.0"
-    def materialDesignVersion = "1.2.1"
     def textCoreVersion = "1.3.0"
     def jUnitVersion = "4.13.1"
     def androidXTestVersion = "1.1.2"
     def truthVersion = "1.1"
     def androidArchTextVersion = "2.1.0"
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$androidCoreVersion"
-    implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "com.google.android.material:material:$materialDesignVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
+    //core
+    implementation Libraries.kotlinStd
+    implementation Libraries.androidCore
+    implementation Libraries.fragmentKTX
+    implementation Libraries.appCompat
+    implementation Libraries.materialDesign
+    implementation Libraries.constraintLayout
+
 
     //hilt for DI
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation Libraries.hilt
+    kapt Libraries.hiltCompiler
 
 
     //retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-moshi:$moshiConverterVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    implementation Libraries.retrofit
+    implementation Libraries.moshiConverter
+    implementation Libraries.okHTTPLogger
 
 
     //persistence
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
-
+    implementation Libraries.room
+    kapt Libraries.roomCompiler
+    implementation Libraries.roomKTX
 
     //shimmer
-    implementation "com.facebook.shimmer:shimmer:$shimmerVersion"
+    implementation Libraries.shimmer
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    //coroutines
+    implementation Libraries.coroutinesAndroid
 
 
-    testImplementation "androidx.test:core:$textCoreVersion"
-    testImplementation "junit:junit:$jUnitVersion"
-    testImplementation "androidx.test.ext:junit:$androidXTestVersion"
-    testImplementation "com.google.truth:truth:$truthVersion"
-    testImplementation "androidx.arch.core:core-testing:$androidArchTextVersion"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
-    testImplementation "androidx.room:room-testing:$room_version"
-    testImplementation "io.mockk:mockk:$mockk_version"
-    testImplementation "androidx.test:runner:$runnerVersion"
-    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation TestLibraries.testCore
+    testImplementation TestLibraries.archCore
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.androidX
+    testImplementation TestLibraries.truth
+    testImplementation TestLibraries.coroutines
+    testImplementation TestLibraries.room
+    testImplementation TestLibraries.mockk
+    testImplementation TestLibraries.testRunner
+    testImplementation TestLibraries.robolectric
+//    testImplementation "junit:junit:$jUnitVersion"
+//    testImplementation "androidx.test.ext:junit:$androidXTestVersion"
+//    testImplementation "com.google.truth:truth:$truthVersion"
+//    testImplementation "androidx.arch.core:core-testing:$androidArchTextVersion"
+//    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+//    testImplementation "androidx.room:room-testing:$room_version"
+//    testImplementation "io.mockk:mockk:$mockk_version"
+//    testImplementation "androidx.test:runner:$runnerVersion"
+//    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+
+
+
+    androidTestImplementation TestLibraries.archCore
+    androidTestImplementation TestLibraries.junit
+    androidTestImplementation TestLibraries.androidX
+    androidTestImplementation TestLibraries.truth
+    androidTestImplementation TestLibraries.coroutines
+    androidTestImplementation TestLibraries.testRunner
+    androidTestImplementation TestLibraries.hilt
+    kaptAndroidTest TestLibraries.hiltKapt
+//    androidTestImplementation "junit:junit:$jUnitVersion"
+//    androidTestImplementation "androidx.test.ext:junit:$androidXTestVersion"
+//    androidTestImplementation "com.google.truth:truth:$truthVersion"
+//    androidTestImplementation "androidx.arch.core:core-testing:$androidArchTextVersion"
+//    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+////    androidTestImplementation "androidx.room:room-testing:$room_version"
+//    androidTestImplementation "androidx.test:runner:$runnerVersion"
+//    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.31-alpha'
+//    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.31-alpha'
 }

@@ -6,20 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ahmedmolawale.starwars.databinding.CharacterItemBinding
-import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterSearchViewModel
 import com.ahmedmolawale.starwars.features.characters.presentation.model.SCharacterPresentation
 
 /**
- * Adapter for the characters list. Has a reference to the [CharacterSearchViewModel] to send actions back to it.
+ * Adapter for the characters list.
  */
-class CharactersAdapter(private val viewModel: CharacterSearchViewModel) :
+class CharactersAdapter(private val onClickCharacter: (SCharacterPresentation) -> Unit) :
     ListAdapter<SCharacterPresentation, CharactersAdapter.ViewHolder>(
         CharacterDiffCallback()
     ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(viewModel, item)
+        holder.bind(onClickCharacter, item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,8 +30,10 @@ class CharactersAdapter(private val viewModel: CharacterSearchViewModel) :
     class ViewHolder private constructor(private val binding: CharacterItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: CharacterSearchViewModel, item: SCharacterPresentation) {
-            binding.characterSearchViewModel = viewModel
+        fun bind(onClickCharacter: (SCharacterPresentation) -> Unit, item: SCharacterPresentation) {
+            binding.root.setOnClickListener {
+                onClickCharacter(item)
+            }
             binding.character = item
             binding.executePendingBindings()
         }

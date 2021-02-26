@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ahmedmolawale.starwars.databinding.CharacterSpeciesFragmentBinding
-import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterSpeciesViewModel
 import com.ahmedmolawale.starwars.features.characters.presentation.adapter.CharacterSpeciesAdapter
 import com.ahmedmolawale.starwars.features.characters.presentation.initRecyclerViewWithLineDecoration
+import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterSpeciesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +23,7 @@ class CharacterSpeciesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = CharacterSpeciesFragmentBinding.inflate(inflater, container, false)
         binding.characterSpeciesViewModel = characterSpeciesViewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -45,9 +45,7 @@ class CharacterSpeciesFragment : Fragment() {
         val viewModel = binding.characterSpeciesViewModel
         if (viewModel != null) {
             characterSpeciesAdapter =
-                CharacterSpeciesAdapter(
-                    viewModel
-                )
+                CharacterSpeciesAdapter()
             context?.let {
                 binding.specieList.initRecyclerViewWithLineDecoration(it)
             }

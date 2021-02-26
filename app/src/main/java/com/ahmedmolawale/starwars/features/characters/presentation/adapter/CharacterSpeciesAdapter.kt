@@ -6,21 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ahmedmolawale.starwars.databinding.CharacterSpecieItemBinding
-import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterFilmViewModel
-import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterSpeciesViewModel
 import com.ahmedmolawale.starwars.features.characters.presentation.model.SpeciePresentation
 
 /**
- * Adapter for the films list. Has a reference to the [CharacterFilmViewModel] to send actions back to it.
+ * Adapter for the films list.
  */
-class CharacterSpeciesAdapter(private val viewModel: CharacterSpeciesViewModel) :
+class CharacterSpeciesAdapter :
     ListAdapter<SpeciePresentation, CharacterSpeciesAdapter.ViewHolder>(
         SpeciesDiffCallback()
     ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(viewModel, item)
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,8 +30,7 @@ class CharacterSpeciesAdapter(private val viewModel: CharacterSpeciesViewModel) 
     class ViewHolder private constructor(private val binding: CharacterSpecieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: CharacterSpeciesViewModel, item: SpeciePresentation) {
-            binding.characterSpeciesViewModel = viewModel
+        fun bind(item: SpeciePresentation) {
             binding.specie = item
             binding.executePendingBindings()
         }

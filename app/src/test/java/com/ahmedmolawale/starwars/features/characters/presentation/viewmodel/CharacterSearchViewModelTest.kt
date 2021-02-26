@@ -8,7 +8,6 @@ import com.ahmedmolawale.starwars.features.characters.domain.model.SCharacter
 import com.ahmedmolawale.starwars.features.characters.domain.usecases.GetCharactersUseCase
 import com.ahmedmolawale.starwars.features.characters.domain.usecases.GetRecentCharactersUseCase
 import com.ahmedmolawale.starwars.features.characters.presentation.mapper.toPresentation
-import com.ahmedmolawale.starwars.features.characters.presentation.model.SCharacterPresentation
 import com.ahmedmolawale.starwars.getOrAwaitValueTest
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
@@ -103,24 +102,5 @@ class CharacterSearchViewModelTest : UnitTest() {
         assertThat(res.errorMessage).isNull()
         assertThat(res.isEmpty).isFalse()
         assertThat(res.isRecentList).isTrue()
-    }
-
-    @Test
-    fun `openCharacterDetails should set openCharacterDetailsEvent`() {
-        val character = SCharacterPresentation(
-            name = "ola",
-            url = "",
-            planetUrl = "",
-            birthYearDesc = "",
-            nameInitials = "",
-            speciesUrls = emptyList(),
-            filmsUrls = emptyList(),
-            heightInInches = "",
-            heightInCm = "",
-            birthYear = ""
-        )
-        characterSearchViewModel.openCharacterDetails(character)
-        val res = characterSearchViewModel.openCharacterDetailsEvent.getOrAwaitValueTest()
-        assertThat(res).isNotNull()
     }
 }

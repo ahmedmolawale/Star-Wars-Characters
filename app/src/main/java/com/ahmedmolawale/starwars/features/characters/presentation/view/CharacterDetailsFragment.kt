@@ -24,7 +24,7 @@ class CharacterDetailsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = CharacterDetailFragmentBinding.inflate(inflater, container, false)
         binding.characterDetailViewModel = characterDetailViewModel
         binding.lifecycleOwner = viewLifecycleOwner

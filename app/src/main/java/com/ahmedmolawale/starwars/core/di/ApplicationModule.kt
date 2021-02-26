@@ -5,7 +5,9 @@ import androidx.room.Room
 import com.ahmedmolawale.starwars.BuildConfig
 import com.ahmedmolawale.starwars.features.characters.data.local.StarWarDatabase
 import com.ahmedmolawale.starwars.features.characters.data.remote.api.StarWarApi
+import com.ahmedmolawale.starwars.features.characters.data.repository.CharacterDetailsRepository
 import com.ahmedmolawale.starwars.features.characters.data.repository.CharacterRepository
+import com.ahmedmolawale.starwars.features.characters.domain.repository.ICharacterDetailsRepository
 import com.ahmedmolawale.starwars.features.characters.domain.repository.ICharacterRepository
 import dagger.Binds
 import dagger.Module
@@ -74,4 +76,7 @@ object DatabaseModule {
 abstract class BindsModule {
     @Binds
     abstract fun bindCharacterRepository(repo: CharacterRepository): ICharacterRepository
+
+    @Binds
+    abstract fun bindCharacterDetailsRepository(repo: CharacterDetailsRepository): ICharacterDetailsRepository
 }

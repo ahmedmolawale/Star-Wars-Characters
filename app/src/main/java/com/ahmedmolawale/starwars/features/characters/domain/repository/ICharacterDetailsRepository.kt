@@ -9,7 +9,8 @@ import com.ahmedmolawale.starwars.features.characters.domain.model.Specie
 import kotlinx.coroutines.flow.Flow
 
 
-interface ICharacterRepository {
-    suspend fun searchCharacters(characterName: String): Flow<Either<Failure, List<SCharacter>>>
-    suspend fun recentCharacters(): Flow<Either<Failure, List<SCharacter>>>
+interface ICharacterDetailsRepository {
+    suspend fun getFilms(filmUrls: List<String>): Flow<Either<Failure, List<Film>>>
+    suspend fun getPlanet(planetUrl: String): Flow<Either<Failure, Planet>>
+    suspend fun getSpecies(speciesUrls: List<String>): Flow<Either<Failure, List<Specie>>>
 }

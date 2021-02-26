@@ -10,16 +10,16 @@ import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.Cha
 import com.ahmedmolawale.starwars.features.characters.presentation.model.FilmPresentation
 
 /**
- * Adapter for the films list. Has a reference to the [CharacterFilmViewModel] to send actions back to it.
+ * Adapter for the films list.
  */
-class CharacterFilmsAdapter(private val viewModel: CharacterFilmViewModel) :
+class CharacterFilmsAdapter :
     ListAdapter<FilmPresentation, CharacterFilmsAdapter.ViewHolder>(
         FilmsDiffCallback()
     ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(viewModel, item)
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,8 +31,7 @@ class CharacterFilmsAdapter(private val viewModel: CharacterFilmViewModel) :
     class ViewHolder private constructor(private val binding: CharacterFilmItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(viewModel: CharacterFilmViewModel, item: FilmPresentation) {
-            binding.characterFilmViewModel = viewModel
+        fun bind(item: FilmPresentation) {
             binding.film = item
             binding.executePendingBindings()
         }

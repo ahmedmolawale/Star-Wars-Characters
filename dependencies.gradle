@@ -1,0 +1,98 @@
+ext {
+
+    //Kotlin
+    kotlin_version = "1.4.10"
+    //Hilt
+    hilt_version = "2.31-alpha"
+
+
+    AndroidSdk = [
+            compileSdk: 30,
+            targetSdk : 30,
+            minSdk    : 22,
+            buildTools: "29.0.3"
+    ]
+
+    BuildPlugins = [
+            jacocoVersion      : "0.8.4",
+            androidGradlePlugin: "com.android.tools.build:gradle:4.1.2",
+            kotlinGradlePlugin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
+            hiltGradlePlugin   : "com.google.dagger:hilt-android-gradle-plugin:$hilt_version",
+            androidApplication : "com.android.application",
+            kotlinAndroid      : "kotlin-android",
+            kotlinKapt         : "kotlin-kapt",
+            daggerHilt         : "dagger.hilt.android.plugin",
+            kotlinParcelize    : "kotlin-parcelize",
+            jacocoCorePlugin   : "org.jacoco:org.jacoco.core:0.8.4"
+
+    ]
+
+
+    AndroidClient = [
+            appId      : "com.ahmedmolawale.starwars",
+            versionCode: 1,
+            versionName: "1.0"
+    ]
+
+    LibrariesVersion = [
+            appCompat       : "1.2.0",
+            fragmentKtx     : "1.2.5",
+            materialDesign  : "1.3.0",
+            androidCore     : "1.3.2",
+            constraintLayout: "2.0.4",
+            okHTTPLogger    : "4.9.0",
+            retrofit        : "2.9.0",
+            shimmer         : "0.5.0",
+            room            : "2.2.6",
+            moshiConverter  : "2.9.0",
+            coroutines      : "1.4.2",
+    ]
+
+    Libraries = [
+            kotlinStd        : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            hilt             : "com.google.dagger:hilt-android:$hilt_version",
+            hiltCompiler     : "com.google.dagger:hilt-android-compiler:$hilt_version",
+            appCompat        : "androidx.appcompat:appcompat:$LibrariesVersion.appCompat",
+            fragmentKTX      : "androidx.fragment:fragment-ktx:$LibrariesVersion.fragmentKtx",
+            androidCore      : "androidx.core:core-ktx:$LibrariesVersion.androidCore",
+            materialDesign   : "com.google.android.material:material:$LibrariesVersion.materialDesign",
+            constraintLayout : "androidx.constraintlayout:constraintlayout:$LibrariesVersion.constraintLayout",
+            retrofit         : "com.squareup.retrofit2:retrofit:$LibrariesVersion.retrofit",
+            moshiConverter   : "com.squareup.retrofit2:converter-moshi:$LibrariesVersion.moshiConverter",
+            okHTTPLogger     : "com.squareup.okhttp3:logging-interceptor:$LibrariesVersion.okHTTPLogger",
+            room             : "androidx.room:room-runtime:$LibrariesVersion.room",
+            roomCompiler     : "androidx.room:room-compiler:$LibrariesVersion.room",
+            roomKTX          : "androidx.room:room-ktx:$LibrariesVersion.room",
+            shimmer          : "com.facebook.shimmer:shimmer:$LibrariesVersion.shimmer",
+            coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$LibrariesVersion.coroutines",
+
+    ]
+
+
+    TestLibrariesVersion = [
+            mockk             : "1.10.5",
+            robolectric: "4.5",
+            runner     : "1.3.0",
+            textCore   : "1.3.0",
+            jUnit      : "4.13.1",
+            androidX          : "1.1.2",
+            truth      : "1.1",
+            androidArch       : "2.1.0"
+    ]
+
+    TestLibraries = [
+            testCore    : "androidx.test:core:$TestLibrariesVersion.textCore",
+            junit       : "junit:junit:$TestLibrariesVersion.jUnit",
+            androidX    : "androidx.test.ext:junit:$TestLibrariesVersion.androidX",
+            truth: "com.google.truth:truth:$TestLibrariesVersion.truth",
+            archCore    : "androidx.arch.core:core-testing:$TestLibrariesVersion.androidArch",
+            coroutines  : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$LibrariesVersion.coroutines",
+            room        : "androidx.room:room-testing:$LibrariesVersion.room",
+            mockk       : "io.mockk:mockk:$TestLibrariesVersion.mockk",
+            testRunner  : "androidx.test:runner:$TestLibrariesVersion.runner",
+            robolectric : "org.robolectric:robolectric:$TestLibrariesVersion.robolectric",
+            hilt     : "com.google.dagger:hilt-android-testing:2.31-alpha",
+            hiltKapt  : "com.google.dagger:hilt-android-compiler:2.31-alpha"
+    ]
+
+}
