@@ -23,7 +23,6 @@ class CharacterSpeciesViewModel @Inject constructor(
     val specieView: LiveData<SpecieView>
         get() = _specieView
 
-
     fun getSpecies(urls: List<String>) {
         _specieView.value = SpecieView(loading = true)
         getCharacterSpeciesUseCase(job, urls) {

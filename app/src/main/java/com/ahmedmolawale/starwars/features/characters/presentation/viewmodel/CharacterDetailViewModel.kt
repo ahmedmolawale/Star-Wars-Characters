@@ -28,7 +28,6 @@ class CharacterDetailViewModel @Inject constructor(
     val character: LiveData<SCharacterPresentation>
         get() = _character
 
-
     fun getPlanet(url: String) {
         _planetView.value = PlanetView(loading = true)
         getCharacterPlanetUseCase(job, url) {
@@ -44,12 +43,12 @@ class CharacterDetailViewModel @Inject constructor(
     }
 
     private fun handlePlanetFailure(failure: Failure) {
-        //Todo error message should be based on failure type
+        // Todo error message should be based on failure type
         _planetView.value =
             PlanetView(errorMessage = "Unable to get planet. Tap to try again")
     }
 
-    //Used through data binding
+    // Used through data binding
     fun retryPlanetAgain() {
         character.value?.let {
             getPlanet(it.planetUrl)

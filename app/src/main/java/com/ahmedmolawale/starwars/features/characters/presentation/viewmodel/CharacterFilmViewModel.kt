@@ -23,7 +23,6 @@ class CharacterFilmViewModel @Inject constructor(
     val filmView: LiveData<FilmView>
         get() = _filmView
 
-
     fun getFilms(urls: List<String>) {
         _filmView.value = FilmView(loading = true)
         getCharacterFilmsUseCase(job, urls) {

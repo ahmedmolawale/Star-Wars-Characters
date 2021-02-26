@@ -16,20 +16,21 @@ import javax.inject.Singleton
 class CharacterRepository @Inject constructor(
     private val apiService: StarWarApi,
     private val charactersDao: CharactersDao
-) :
-    ICharacterRepository {
+) : ICharacterRepository {
     override suspend fun searchCharacters(characterName: String): Flow<Either<Failure, List<SCharacter>>> =
         flow {
             val res = apiService.searchCharacters(characterName)
-            emit(when (res.isSuccessful) {
-                true -> {
-                    res.body()?.let { it ->
-                        cacheCharacters(it.results)
-                        Either.Right(it.results.map { a -> a.toDomainObject() })
-                    } ?: Either.Left(Failure.DataError)
+            emit(
+                when (res.isSuccessful) {
+                    true -> {
+                        res.body()?.let { it ->
+                            cacheCharacters(it.results)
+                            Either.Right(it.results.map { a -> a.toDomainObject() })
+                        } ?: Either.Left(Failure.DataError)
+                    }
+                    false -> Either.Left(Failure.ServerError)
                 }
-                false -> Either.Left(Failure.ServerError)
-            })
+            )
         }
 
     override suspend fun recentCharacters(): Flow<Either<Failure, List<SCharacter>>> = flow {
@@ -37,14 +38,15 @@ class CharacterRepository @Inject constructor(
         emit(Either.Right(res.map { it.toDomainObject() }))
     }
 
-
     private suspend fun cacheCharacters(list: List<CharacterResponse>) {
-        //saving only the first ten
+        // saving only the first ten
         if (list.size >= 10) {
             charactersDao.deleteAllCharacters()
-            charactersDao.insertCharacters(list.map {
-                it.toCharacterEntity()
-            }.subList(0, 10))
+            charactersDao.insertCharacters(
+                list.map {
+                    it.toCharacterEntity()
+                }.subList(0, 10)
+            )
         }
     }
 }

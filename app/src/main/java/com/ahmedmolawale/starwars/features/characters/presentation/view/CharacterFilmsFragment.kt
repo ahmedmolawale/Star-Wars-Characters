@@ -42,7 +42,6 @@ class CharacterFilmsFragment : Fragment() {
         setupListAdapter()
     }
 
-
     private fun setupListAdapter() {
         val viewModel = binding.characterFilmViewModel
         if (viewModel != null) {
@@ -64,5 +63,4 @@ class CharacterFilmsFragment : Fragment() {
         val TAG = "CharacterFilmFragment"
         val CHARACTER_DETAILS = "character_details"
     }
-
 }

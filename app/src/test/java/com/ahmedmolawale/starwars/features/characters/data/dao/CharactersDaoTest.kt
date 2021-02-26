@@ -23,7 +23,6 @@ import org.robolectric.annotation.Config
 import java.io.IOException
 import kotlin.jvm.Throws
 
-
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @Config(manifest = Config.NONE)
@@ -41,7 +40,7 @@ class CharactersDaoTest {
 
     @Before
     fun setUp() {
-        //setup room db
+        // setup room db
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(context, StarWarDatabase::class.java)
             .allowMainThreadQueries()
@@ -79,7 +78,6 @@ class CharactersDaoTest {
                 species = specieEntities
             )
         )
-
     }
 
     @Test
@@ -105,7 +103,7 @@ class CharactersDaoTest {
 
     @Test
     fun `delete species should remove species from db`() = runBlockingTest {
-        //need to insert a character before inserting films because films depends on character
+        // need to insert a character before inserting films because films depends on character
         charactersDao.insertACharacter(
             characterEntity
         )
@@ -119,7 +117,7 @@ class CharactersDaoTest {
 
     @Test
     fun `insert films should save films to db`() = runBlockingTest {
-        //need to insert a character before inserting films because films depends on character
+        // need to insert a character before inserting films because films depends on character
         charactersDao.insertACharacter(
             characterEntity
         )
@@ -132,7 +130,7 @@ class CharactersDaoTest {
 
     @Test
     fun `delete films should remove films from db`() = runBlockingTest {
-        //need to insert a character before inserting films because films depends on character
+        // need to insert a character before inserting films because films depends on character
         charactersDao.insertACharacter(
             characterEntity
         )

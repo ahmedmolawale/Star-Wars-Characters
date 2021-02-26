@@ -92,5 +92,4 @@ class CharacterSearchFragment : Fragment() {
         val TAG = "CharacterSearchFragment"
         val CHARACTER_DETAILS = "character_details"
     }
-
 }

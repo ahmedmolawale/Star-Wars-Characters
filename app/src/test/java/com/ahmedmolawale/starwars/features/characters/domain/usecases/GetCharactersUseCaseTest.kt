@@ -1,7 +1,7 @@
 package com.ahmedmolawale.starwars.features.characters.domain.usecases
 
-import com.ahmedmolawale.starwars.core.functional.Either
 import com.ahmedmolawale.starwars.UnitTest
+import com.ahmedmolawale.starwars.core.functional.Either
 import com.ahmedmolawale.starwars.features.characters.domain.model.SCharacter
 import com.ahmedmolawale.starwars.features.characters.domain.repository.ICharacterRepository
 import io.mockk.coEvery
@@ -24,7 +24,6 @@ class GetCharactersUseCaseTest : UnitTest() {
     @Before
     fun setUp() {
         getCharactersUseCase = GetCharactersUseCase(characterRepository)
-
     }
 
     @Test

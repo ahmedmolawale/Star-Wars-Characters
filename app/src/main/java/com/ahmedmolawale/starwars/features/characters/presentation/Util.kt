@@ -14,15 +14,16 @@ import java.math.RoundingMode
  **/
 fun convertCMToInches(centimeters: String): String {
     return try {
-        (BigDecimal(centimeters.toDouble() * 0.393701).setScale(
-            3,
-            RoundingMode.HALF_EVEN
-        )).toString()
+        (
+            BigDecimal(centimeters.toDouble() * 0.393701).setScale(
+                3,
+                RoundingMode.HALF_EVEN
+            )
+            ).toString()
     } catch (e: NumberFormatException) {
         "unknown"
     }
 }
-
 
 fun populationValue(population: String): String {
     return try {

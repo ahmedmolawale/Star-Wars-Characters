@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.viewModels
 import com.ahmedmolawale.starwars.databinding.CharacterDetailFragmentBinding
-import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterDetailViewModel
 import com.ahmedmolawale.starwars.features.characters.presentation.model.SCharacterPresentation
+import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -94,7 +97,5 @@ class CharacterDetailsFragment : Fragment() {
                 else -> "Species"
             }
         }
-
     }
-
 }

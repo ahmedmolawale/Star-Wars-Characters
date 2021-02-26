@@ -1,6 +1,5 @@
 package com.ahmedmolawale.starwars.features.characters.domain.model
 
-
 /**
  * A data class to hold information about a star war character
  * Note that I have named it [SCharacter] to avoid conflict with the standard [Character] class

@@ -1,6 +1,10 @@
 package com.ahmedmolawale.starwars.features.characters.data.local.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
 import com.ahmedmolawale.starwars.features.characters.data.local.model.CharacterEntity
 import com.ahmedmolawale.starwars.features.characters.data.local.model.CharacterWithFilmsWithSpecies
 import com.ahmedmolawale.starwars.features.characters.data.local.model.FilmEntity
@@ -38,14 +42,18 @@ interface CharactersDao {
     suspend fun insertCharacters(characterWithFilmsWithSpecies: List<CharacterWithFilmsWithSpecies>) {
         for (character in characterWithFilmsWithSpecies) {
             val characterId = insertACharacter(character = character.character)
-            insertFilms(character.films.map {
-                it.characterId = characterId
-                it
-            })
-            insertSpecies(character.species.map {
-                it.characterId = characterId
-                it
-            })
+            insertFilms(
+                character.films.map {
+                    it.characterId = characterId
+                    it
+                }
+            )
+            insertSpecies(
+                character.species.map {
+                    it.characterId = characterId
+                    it
+                }
+            )
         }
     }
 

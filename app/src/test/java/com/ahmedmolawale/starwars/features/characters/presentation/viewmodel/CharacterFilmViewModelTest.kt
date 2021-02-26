@@ -9,7 +9,6 @@ import com.ahmedmolawale.starwars.features.characters.domain.model.Specie
 import com.ahmedmolawale.starwars.features.characters.domain.usecases.GetCharacterFilmsUseCase
 import com.ahmedmolawale.starwars.features.characters.presentation.mapper.toPresentation
 import com.ahmedmolawale.starwars.getOrAwaitValueTest
-import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.impl.annotations.MockK

@@ -68,7 +68,6 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun providesCharacterDao(db: StarWarDatabase) = db.charactersDao()
-
 }
 
 @Module

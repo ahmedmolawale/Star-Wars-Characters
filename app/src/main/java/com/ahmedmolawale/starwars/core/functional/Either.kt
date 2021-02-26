@@ -35,7 +35,6 @@ sealed class Either<out L, out R> {
     fun <L> left(a: L) =
         Left(a)
 
-    
     /**
      * Creates a Left type.
      * @see Right

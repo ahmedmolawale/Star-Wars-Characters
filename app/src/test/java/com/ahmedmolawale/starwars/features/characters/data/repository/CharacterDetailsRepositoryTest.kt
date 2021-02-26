@@ -20,7 +20,6 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.Response
 
-
 @ExperimentalCoroutinesApi
 class CharacterDetailsRepositoryTest : UnitTest() {
 
@@ -41,7 +40,6 @@ class CharacterDetailsRepositoryTest : UnitTest() {
 
     @MockK
     private lateinit var specieResponse: Response<SpecieResponse>
-
 
     @Before
     fun setUp() {

@@ -18,7 +18,6 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.Response
 
-
 @ExperimentalCoroutinesApi
 class CharacterRepositoryTest : UnitTest() {
 
@@ -70,7 +69,8 @@ class CharacterRepositoryTest : UnitTest() {
     @Test
     fun `searchCharacters should get characters list`() = runBlockingTest {
         characterSearchResponse = CharacterSearchResponse(
-            1, "", "", results = listOf(
+            1, "", "",
+            results = listOf(
                 CharacterResponse(
                     name = "Olawale",
                     birthYear = "2000",

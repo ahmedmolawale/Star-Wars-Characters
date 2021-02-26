@@ -12,7 +12,6 @@ import com.ahmedmolawale.starwars.features.characters.presentation.model.SCharac
 import com.ahmedmolawale.starwars.features.characters.presentation.model.SpeciePresentation
 import com.ahmedmolawale.starwars.features.characters.presentation.populationValue
 
-
 fun SCharacter.toPresentation() = SCharacterPresentation(
     name = name,
     nameInitials = extractInitials(name),

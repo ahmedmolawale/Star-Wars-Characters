@@ -36,14 +36,16 @@ class CharacterDetailsRepository @Inject constructor(
 
     override suspend fun getPlanet(planetUrl: String): Flow<Either<Failure, Planet>> = flow {
         val res = apiService.fetchPlanet(planetUrl.enforceHttps())
-        emit(when (res.isSuccessful) {
-            true -> {
-                res.body()?.let { it ->
-                    Either.Right(it.toDomainObject())
-                } ?: Either.Left(Failure.DataError)
+        emit(
+            when (res.isSuccessful) {
+                true -> {
+                    res.body()?.let { it ->
+                        Either.Right(it.toDomainObject())
+                    } ?: Either.Left(Failure.DataError)
+                }
+                false -> Either.Left(Failure.ServerError)
             }
-            false -> Either.Left(Failure.ServerError)
-        })
+        )
     }
 
     override suspend fun getSpecies(speciesUrls: List<String>): Flow<Either<Failure, List<Specie>>> =

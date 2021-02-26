@@ -8,7 +8,6 @@ import com.ahmedmolawale.starwars.features.characters.domain.model.SCharacter
 import com.ahmedmolawale.starwars.features.characters.domain.usecases.GetCharactersUseCase
 import com.ahmedmolawale.starwars.features.characters.domain.usecases.GetRecentCharactersUseCase
 import com.ahmedmolawale.starwars.features.characters.presentation.mapper.toPresentation
-import com.ahmedmolawale.starwars.features.characters.presentation.model.SCharacterPresentation
 import com.ahmedmolawale.starwars.features.characters.presentation.model.state.CharacterSearchView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -22,9 +21,6 @@ class CharacterSearchViewModel @Inject constructor(
     ViewModel() {
 
     private val job = Job()
-    private val _openCharacterDetailsEvent = MutableLiveData<SCharacterPresentation>()
-    val openCharacterDetailsEvent: LiveData<SCharacterPresentation>
-        get() = _openCharacterDetailsEvent
 
     private val _charactersSearchView = MutableLiveData<CharacterSearchView>()
     val charactersSearchView: LiveData<CharacterSearchView>
@@ -56,7 +52,7 @@ class CharacterSearchViewModel @Inject constructor(
     }
 
     private fun handleFailure(failure: Failure) {
-        //Todo error message should be based on failure type
+        // Todo error message should be based on failure type
         _charactersSearchView.value = CharacterSearchView(errorMessage = "An error occurred.")
     }
 

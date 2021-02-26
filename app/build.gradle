@@ -105,18 +105,6 @@ android {
 
 dependencies {
 
-    def coroutinesVersion = "1.4.2"
-    def room_version = "2.2.6"
-    def mockk_version = "1.10.5"
-    def robolectricVersion = "4.5"
-    def runnerVersion = "1.3.0"
-    def textCoreVersion = "1.3.0"
-    def jUnitVersion = "4.13.1"
-    def androidXTestVersion = "1.1.2"
-    def truthVersion = "1.1"
-    def androidArchTextVersion = "2.1.0"
-
-
     //core
     implementation Libraries.kotlinStd
     implementation Libraries.androidCore
@@ -159,17 +147,6 @@ dependencies {
     testImplementation TestLibraries.mockk
     testImplementation TestLibraries.testRunner
     testImplementation TestLibraries.robolectric
-//    testImplementation "junit:junit:$jUnitVersion"
-//    testImplementation "androidx.test.ext:junit:$androidXTestVersion"
-//    testImplementation "com.google.truth:truth:$truthVersion"
-//    testImplementation "androidx.arch.core:core-testing:$androidArchTextVersion"
-//    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
-//    testImplementation "androidx.room:room-testing:$room_version"
-//    testImplementation "io.mockk:mockk:$mockk_version"
-//    testImplementation "androidx.test:runner:$runnerVersion"
-//    testImplementation "org.robolectric:robolectric:$robolectricVersion"
-
-
 
     androidTestImplementation TestLibraries.archCore
     androidTestImplementation TestLibraries.junit
@@ -179,13 +156,5 @@ dependencies {
     androidTestImplementation TestLibraries.testRunner
     androidTestImplementation TestLibraries.hilt
     kaptAndroidTest TestLibraries.hiltKapt
-//    androidTestImplementation "junit:junit:$jUnitVersion"
-//    androidTestImplementation "androidx.test.ext:junit:$androidXTestVersion"
-//    androidTestImplementation "com.google.truth:truth:$truthVersion"
-//    androidTestImplementation "androidx.arch.core:core-testing:$androidArchTextVersion"
-//    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
-////    androidTestImplementation "androidx.room:room-testing:$room_version"
-//    androidTestImplementation "androidx.test:runner:$runnerVersion"
-//    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.31-alpha'
-//    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.31-alpha'
 }
+apply from: "../ktlint.gradle"

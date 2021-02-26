@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ahmedmolawale.starwars.databinding.CharacterFilmItemBinding
-import com.ahmedmolawale.starwars.features.characters.presentation.viewmodel.CharacterFilmViewModel
 import com.ahmedmolawale.starwars.features.characters.presentation.model.FilmPresentation
 
 /**

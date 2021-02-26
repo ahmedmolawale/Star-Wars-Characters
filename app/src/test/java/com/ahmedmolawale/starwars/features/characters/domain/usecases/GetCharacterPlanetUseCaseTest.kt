@@ -1,22 +1,20 @@
 package com.ahmedmolawale.starwars.features.characters.domain.usecases
 
-import com.ahmedmolawale.starwars.core.functional.Either
 import com.ahmedmolawale.starwars.UnitTest
+import com.ahmedmolawale.starwars.core.functional.Either
 import com.ahmedmolawale.starwars.features.characters.domain.model.Planet
 import com.ahmedmolawale.starwars.features.characters.domain.repository.ICharacterDetailsRepository
-import com.ahmedmolawale.starwars.features.characters.domain.repository.ICharacterRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
-
 import org.junit.Before
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class GetCharacterPlanetUseCaseTest : UnitTest(){
+class GetCharacterPlanetUseCaseTest : UnitTest() {
     private lateinit var getCharacterPlanetUseCase: GetCharacterPlanetUseCase
 
     @MockK

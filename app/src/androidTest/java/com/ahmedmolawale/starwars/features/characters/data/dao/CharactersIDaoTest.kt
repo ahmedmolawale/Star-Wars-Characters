@@ -8,7 +8,6 @@ import com.ahmedmolawale.starwars.features.characters.data.local.model.Character
 import com.ahmedmolawale.starwars.features.characters.data.local.model.CharacterWithFilmsWithSpecies
 import com.ahmedmolawale.starwars.features.characters.data.local.model.FilmEntity
 import com.ahmedmolawale.starwars.features.characters.data.local.model.SpecieEntity
-import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,7 +19,6 @@ import org.junit.Test
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Named
-
 
 @ExperimentalCoroutinesApi
 @SmallTest
@@ -45,13 +43,13 @@ class CharactersIDaoTest {
 
     @Before
     fun setUp() {
-        //setup room db
+        // setup room db
         hiltRule.inject()
 //        val context = ApplicationProvider.getApplicationContext<Context>()
 //        db = Room.inMemoryDatabaseBuilder(context, StarWarDatabase::class.java)
 //            .allowMainThreadQueries()
 //            .build()
-        //charactersDao = db.charactersDao()
+        // charactersDao = db.charactersDao()
         characterEntity =
             CharacterEntity(
                 id = 1,
@@ -84,7 +82,6 @@ class CharactersIDaoTest {
                 species = specieEntities
             )
         )
-
     }
 
     @Test
@@ -95,7 +92,6 @@ class CharactersIDaoTest {
 //        val savedCharacters = charactersDao.getAllCharacters()
 //        assertThat(savedCharacters[0].character).isEqualTo(characterEntity)
     }
-
 
     @After
     @Throws(IOException::class)

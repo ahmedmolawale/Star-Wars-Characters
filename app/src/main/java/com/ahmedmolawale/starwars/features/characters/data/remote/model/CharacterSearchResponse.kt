@@ -47,5 +47,3 @@ data class CharacterSearchResponse(
     val previous: Any,
     val results: List<CharacterResponse>
 )
-
-

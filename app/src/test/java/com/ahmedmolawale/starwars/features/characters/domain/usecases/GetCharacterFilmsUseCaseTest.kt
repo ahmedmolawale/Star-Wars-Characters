@@ -1,10 +1,9 @@
 package com.ahmedmolawale.starwars.features.characters.domain.usecases
 
-import com.ahmedmolawale.starwars.core.functional.Either
 import com.ahmedmolawale.starwars.UnitTest
+import com.ahmedmolawale.starwars.core.functional.Either
 import com.ahmedmolawale.starwars.features.characters.domain.model.Film
 import com.ahmedmolawale.starwars.features.characters.domain.repository.ICharacterDetailsRepository
-import com.ahmedmolawale.starwars.features.characters.domain.repository.ICharacterRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
