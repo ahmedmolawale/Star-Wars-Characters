@@ -51,6 +51,7 @@ class CharacterSearchViewModel @Inject constructor(
             _charactersSearchView.value = CharacterSearchView(isEmpty = true)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun handleFailure(failure: Failure) {
         // Todo error message should be based on failure type
         _charactersSearchView.value = CharacterSearchView(errorMessage = "An error occurred.")

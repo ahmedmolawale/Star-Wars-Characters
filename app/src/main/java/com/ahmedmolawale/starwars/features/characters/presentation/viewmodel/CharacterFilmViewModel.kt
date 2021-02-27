@@ -41,6 +41,7 @@ class CharacterFilmViewModel @Inject constructor(
         }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun handlePlanetFailure(failure: Failure) {
         _filmView.value =
             FilmView(errorMessage = "An error has occurred")

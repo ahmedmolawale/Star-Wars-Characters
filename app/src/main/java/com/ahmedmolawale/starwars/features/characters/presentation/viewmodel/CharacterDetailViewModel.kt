@@ -42,6 +42,7 @@ class CharacterDetailViewModel @Inject constructor(
         _planetView.value = PlanetView(planet = planet.toPresentation())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun handlePlanetFailure(failure: Failure) {
         // Todo error message should be based on failure type
         _planetView.value =

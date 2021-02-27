@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ahmedmolawale.starwars.R
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.util.*
 
 /**
  * Note: Data being returned that is expected to be numbers can sometimes be a string of characters
@@ -38,9 +39,9 @@ fun extractInitials(name: String): String {
     val s = name.trim().split(" ")
     if (s.isNotEmpty()) {
         return if (s.size == 1) {
-            s[0][0].toString().toUpperCase()
+            s[0][0].toString().toUpperCase(Locale.getDefault())
         } else {
-            s[0][0].toString().plus(s[1][0].toString()).toUpperCase()
+            s[0][0].toString().plus(s[1][0].toString()).toUpperCase(Locale.getDefault())
         }
     }
     return ""

@@ -41,6 +41,7 @@ class CharacterSpeciesViewModel @Inject constructor(
         }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun handleSpecieFailure(failure: Failure) {
         _specieView.value =
             SpecieView(errorMessage = "An error has occurred")
