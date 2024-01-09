@@ -1,6 +1,6 @@
 # Star Wars
 
-An Android application to showcase Star Wars characters. The application allows user to search
+A Android application to showcase Star Wars characters. The application allows user to search
 for Star Wars characters and view the details of each character. The application consumes
 data from the [Star Wars API](https://swapi.dev/)
 
