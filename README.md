@@ -1,4 +1,3 @@
-
 # Star Wars
 
 An Android application to showcase Star Wars characters. The application allows user to search
